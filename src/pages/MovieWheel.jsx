@@ -1,3 +1,5 @@
+
+
 import { useEffect, useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -70,7 +72,7 @@ const MovieWheel = () => {
     const sliceSize = 360 / selectedMovies.length;
 
     const handleMovieToggle = (movie) => {
-        if (isSpinning) return; 
+        if (isSpinning) return;
 
         const isAlreadySelected = selectedMovies.some((m) => m.id === movie.id);
 
@@ -132,9 +134,9 @@ const MovieWheel = () => {
         setRotation(finalRotation);
 
         setTimeout(() => {
-            setWinner(selectedMovies[randomIndex]); 
+            setWinner(selectedMovies[randomIndex]);
             setIsSpinning(false);
-            triggerGlitter(); 
+            triggerGlitter();
         }, 3000);
     };
 
@@ -146,9 +148,10 @@ const MovieWheel = () => {
 
             <Navbar />
 
-            <div className="mt-30 flex flex-col flex-1 items-center justify-center text-white font-sans">
-
-
+            <div
+                className={`mt-20 md:mt-30 flex flex-col flex-1 items-center justify-center text-white font-sans px-3 transition-all duration-700 ease-out ${winner ? "-translate-y-24 md:-translate-y-32" : "translate-y-0"
+                    }`}
+            >
                 {winner && (
 
                     <div className="w-full flex flex-col items-center">
@@ -162,15 +165,14 @@ const MovieWheel = () => {
                         <div className="w-full bg-gradient-to-r from-transparent via-zinc-800/80 to-transparent py-10 md:py-14 px-4 mb-24 mt-2 flex justify-center backdrop-blur-sm shadow-[0_30px_60px_-30px_rgba(120,60,193,0.8)] select-none animate-fade-in transition-all duration-700 ease-out hover:bg-zinc-800/50">
 
 
-                            <div className="w-full max-w-5xl flex flex-col md:flex-row items-center gap-10 px-4 md:px-7">
-
+                            <div className="w-full max-w-5xl flex flex-col md:flex-row items-center gap-6 md:gap-10 px-4 md:px-7">
 
                                 {winner.image && (
                                     <div className="shrink-0 transform transition-all duration-700 ease-out md:translate-y-1 hover:-translate-y-1 hover:scale-[1.02]">
                                         <img
                                             src={winner.image}
                                             alt={winner.title}
-                                            className="w-64 h-96 md:w-72 md:h-108 object-cover rounded-2xl border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.7)]"
+                                            className="w-44 h-64 sm:w-52 sm:h-80 md:w-72 md:h-108 object-cover rounded-2xl border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.7)]"
                                         />
                                     </div>
                                 )}
@@ -188,7 +190,7 @@ const MovieWheel = () => {
                                         Studio Ghibli Presents:
                                     </p>
 
-                                    <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-purple-200 font-black text-3xl md:text-5xl lg:text-6xl uppercase tracking-wide mb-4 leading-tight">
+                                    <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-purple-200 font-black text-2xl sm:text-3xl md:text-5xl lg:text-6xl uppercase tracking-wide mb-4 leading-tight">
                                         {winner.title}
                                     </h2>
 
@@ -225,7 +227,7 @@ const MovieWheel = () => {
 
 
 
-                <h1 className="text-5xl font-bold tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-300 to-indigo-200 mb-15 uppercase drop-shadow-sm">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-300 to-indigo-200 mb-10 md:mb-15 uppercase drop-shadow-sm text-center">
                     Movie Wheel
                 </h1>
 
@@ -233,13 +235,15 @@ const MovieWheel = () => {
 
                 {/* SVG Wheel */}
                 <div
-                    className={`w-[450px] h-[450px] rounded-full transition-all duration-700 ${winner
-                        ? "shadow-[0_0_80px_rgba(182,127,219,0.8)] scale-102" // Έντονη χρυσή λάμψη και ελαφρύ zoom όταν κερδίζει
-                        : "shadow-[0_0_80px_rgba(182,127,219,0.8)]"       // Απαλή μοβ λάμψη κατά τη διάρκεια του spin / αναμονής
+                    className={`w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[400px] md:h-[400px] rounded-full transition-all duration-700 ${winner
+                        ? "shadow-[0_0_80px_rgba(182,127,219,0.8)] scale-102"
+                        : "shadow-[0_0_80px_rgba(182,127,219,0.8)]"
                         }`}
                     style={{
                         transform: `rotate(${rotation}deg)`,
-                        transition: isSpinning ? "transform 3s cubic-bezier(0.2, 0.8, 0.2, 1)" : "all 0.7s ease-out, transform 0s"
+                        transition: isSpinning
+                            ? "transform 3s cubic-bezier(0.2, 0.8, 0.2, 1)"
+                            : "all 0.7s ease-out, transform 0s",
                     }}
                 >
                     <svg viewBox="0 0 200 200" className="w-full h-full">
@@ -292,39 +296,38 @@ const MovieWheel = () => {
                 <button
                     onClick={spinWheel}
                     disabled={isSpinning || selectedMovies.length < 2}
-                    className="mt-12 bg-purple-600 hover:bg-purple-500 tracking-widest px-8 py-3 rounded-full text-sm font-light uppercase transition disabled:opacity-30"
+                    className="mt-10 md:mt-12 bg-purple-600 hover:bg-purple-500 tracking-widest px-6 md:px-8 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-light uppercase transition disabled:opacity-30"
                 >
                     {isSpinning ? "Spinning..." : "SPIN"}
                 </button>
 
                 <div className="w-full max-w-4xl px-6 mb-10 mt-15">
-                    
-                    <p className="text-zinc-400 text-xl uppercase tracking-wider text-center mb-4">
+
+                    <p className="text-zinc-400 text-xl uppercase tracking-wider text-center mb-6">
                         Choose your movies ({selectedMovies.length} selected):
                     </p>
-                    
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-h-40 overflow-y-auto bg-zinc-800/50 p-4 rounded-xl border border-zinc-800 scrollbar-thin">
-                        {allMovies.map((movie) => {
-                            const isChecked = selectedMovies.some((m) => m.id === movie.id);
-                            return (
-                                <label
-                                    key={movie.id}
-                                    className={`flex items-center space-x-3 p-2 rounded-lg cursor-pointer transition select-none text-xs border ${isChecked
-                                        ? "bg-purple-900/40 border-purple-500 text-purple-200"
-                                        : "bg-zinc-800 border-transparent text-zinc-400 hover:bg-zinc-750"
-                                        }`}
-                                >
-                                    <input
-                                        type="checkbox"
-                                        checked={isChecked}
-                                        disabled={isSpinning}
-                                        onChange={() => handleMovieToggle(movie)}
-                                        className="accent-purple-500 w-4 h-4 cursor-pointer"
-                                    />
-                                    <span className="truncate">{movie.title}</span>
-                                </label>
-                            );
-                        })}
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 max-h-40 overflow-y-auto bg-zinc-800/50 p-3 sm:p-4 rounded-xl border border-zinc-800 scrollbar-thin">                        {allMovies.map((movie) => {
+                        const isChecked = selectedMovies.some((m) => m.id === movie.id);
+                        return (
+                            <label
+                                key={movie.id}
+                                className={`flex items-center space-x-3 p-2 rounded-lg cursor-pointer transition select-none text-xs border ${isChecked
+                                    ? "bg-purple-900/40 border-purple-500 text-purple-200"
+                                    : "bg-zinc-800 border-transparent text-zinc-400 hover:bg-zinc-750"
+                                    }`}
+                            >
+                                <input
+                                    type="checkbox"
+                                    checked={isChecked}
+                                    disabled={isSpinning}
+                                    onChange={() => handleMovieToggle(movie)}
+                                    className="accent-purple-500 w-4 h-4 cursor-pointer"
+                                />
+                                <span className="truncate">{movie.title}</span>
+                            </label>
+                        );
+                    })}
                     </div>
                 </div>
             </div>
