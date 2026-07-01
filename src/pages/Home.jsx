@@ -83,12 +83,12 @@ const Home = () => {
     };
 
     return (
-        <div className="relative flex flex-col items-center justify-center gap-6 md:gap-10 px-4 md:px-8 select-none">
+        <div className="relative min-h-screen flex flex-col px-4 md:px-8 select-none">
 
             <div className="absolute inset-0 bg-black/50"></div>
 
-            <div className="relative z-10 w-full max-w-7xl">
-
+            <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col flex-1">
+               
                 <Navbar />
 
                 {/* Header Container: Σταθερή row διάταξη που δεν σπάει και δεν μικραίνει στα κινητά */}
@@ -161,9 +161,10 @@ const Home = () => {
                     ▲
                 </button>
 
-                <div className="mt-auto w-full md:mb-50">
+                <div className="mt-auto w-full  ">
                     <Footer />
                 </div>
+
             </div>
         </div>
     );
